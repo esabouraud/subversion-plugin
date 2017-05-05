@@ -723,6 +723,8 @@ public class SubversionSCM extends SCM implements Serializable {
         boolean created;
         try {
             created = new SubversionChangeLogBuilder(build, workspace, (SVNRevisionState) baseline, env, listener, this).run(externals, new StreamResult(os));
+        } catch (hudson.util.IOException2 ex) {
+            created = false;
         } finally {
             os.close();
         }
